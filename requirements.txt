@@ -1,0 +1,6 @@
+click==8.1.*
+tqdm==4.*
+dnspython==2.*
+python-whois==0.8.* 
+requests==2.*
+beautifulsoup4==4.*
