@@ -1,4 +1,4 @@
-import json, click
+import click
 
 @click.group(context_settings=dict(help_option_names=["-h", "--help"]))
 def cli():
@@ -8,10 +8,7 @@ def cli():
   Execute `python cli.py <comando> -h` para detalhes de cada módulo."""
   pass
 
-@cli.command(
-"portscan",
-short_help="Varredura TCP/UDP - top-1000 ou intervalo personalizado",
-help="""\
+@cli.command("portscan",short_help="Varredura TCP/UDP - top-1000 ou intervalo personalizado",help="""\
 Realiza varredura de portas TCP e/ou UDP.
 
 \b
@@ -52,11 +49,8 @@ def cmd_portscan(alvo, tcp, udp, top1000, porta_intervalo):
     else:
       click.echo(line)
 
-@cli.command(
-"dnslookup",
-short_help="Consulta DNS A/AAAA/MX/NS/TXT",
-help="""\
-Resolve registros DNS de um domínio ou host.
+@cli.command("dnslookup", short_help="Consulta DNS A/AAAA/MX/NS/TXT", help="""\
+\ Resolve registros DNS de um domínio ou host.
 
 \b
 EXEMPLOS
@@ -84,16 +78,12 @@ def cmd_dns(alvo, types, nameservers):
         click.echo(f"  {val}")
 
 
-@cli.command(
-    "whois",
-    short_help="Consulta WHOIS simplificada",
-    help="""\
+@cli.command("whois", short_help="Consulta WHOIS simplificada", help="""\
 Retorna informações de registro do domínio.
 
 \b
 Exemplos
-  ▸ Saída tabular           : python recontoolkit.py.py whois exemplo.com
-  ▸ Saída JSON              : python recontoolkit.py.py whois exemplo.com --json
+  ▸ Saída           : python recontoolkit.py.py whois exemplo.com
 """)
 @click.argument("alvo")
 def cmd_whois(alvo):
@@ -124,17 +114,13 @@ def cmd_whois(alvo):
     click.echo(f"{label.ljust(col_w)}{_fmt(info.get(chave))}")
 
 
-@cli.command(
-    "subdomains",
-    short_help="Força-bruta simples de subdomínios",
-    help="""\
+@cli.command("subdomains",short_help="Força-bruta simples de subdomínios",help="""\
 Tenta descobrir subdomínios usando wordlist.
 
 \b
 Exemplos
   ▸ Wordlist default            : python recontoolkit.py subdomains alvo.com
   ▸ Wordlist custom + 50 threads: python recontoolkit.py subdomains alvo.com -w lista.txt -t 50
-  ▸ Saída JSON                  : python recontoolkit.py subdomains alvo.com --json
 """)
 @click.argument("dominio")
 @click.option("-w", "--wordlist", type=click.Path(exists=True), help="Arquivo com palavras, uma por linha.")
@@ -167,11 +153,9 @@ Faz uma requisição HTTP/HTTPS e tenta inferir servidor e frameworks.
 
 \b
 Exemplos
-  ▸ Saída tabular           : python recontoolkit.py fingerprint https://exemplo.com
-  ▸ Saída JSON              : python recontoolkit.py fingerprint https://exemplo.com --json
+  ▸ Saída           : python recontoolkit.py fingerprint https://exemplo.com
 """)
 @click.argument("url")
-@click.option("--json", "json_out", is_flag=True, help="Exibe saída em JSON bruto.")
 def cmd_fingerprint(url):
   from recon import techfinger
   res = techfinger(url)
