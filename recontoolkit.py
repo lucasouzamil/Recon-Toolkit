@@ -49,8 +49,8 @@ def cmd_portscan(alvo, tcp, udp, top1000, porta_intervalo):
     else:
       click.echo(line)
 
-@cli.command("dnslookup", short_help="Consulta DNS A/AAAA/MX/NS/TXT", help="""\
-\ Resolve registros DNS de um domínio ou host.
+@cli.command("dnslookup", short_help="Consulta DNS A/AAAA/MX/NS/TXT", help="""
+Resolve registros DNS de um domínio ou host.
 
 \b
 EXEMPLOS
